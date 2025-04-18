@@ -14,7 +14,7 @@ const chatHistory = [
 const availableModels = webllm.prebuiltAppConfig.model_list.map(
   (m) => m.model_id
 );
-let selectedModel = "Phi-3.5-mini-instruct-q4f16_1-MLC";
+let selectedModel = "gemma-2-2b-it-q4f32_1-MLC";
 let engine = null;
 let isInitialized = false;
 let initializationPromise = null; // Track ongoing initialization
@@ -43,13 +43,13 @@ function showWelcomeDialog() {
   dialog.classList.add('welcome-dialog');
   
   dialog.innerHTML = `
-    <h2>Welcome to Phi Chat</h2>
+    <h2>Welcome to Chat</h2>
     <p>A private and powerful AI chatbot that runs locally in your browser.</p>
-    <p>You are about to load Phi-3.5-mini-instruct, which will be cached and reused when you revisit the page.</p>
+    <p>You are about to load an AI model, which will be cached and reused when you revisit the page.</p>
     
     <div class="size-info">
       <span class="material-symbols-rounded">hard_drive</span>
-      <span>Model size: 2.3 GB (downloaded once and cached)</span>
+      <span>Model size: 1.5 GB (downloaded once and cached for future use)</span>
     </div>
     
     <p>Everything runs directly in your browser, meaning your conversations aren't sent to a server. You can even disconnect from the internet after the model has loaded!</p>

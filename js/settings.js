@@ -97,6 +97,7 @@ export function openSettingsView() {
             <div class="settings-actions">
                 <button id="save-settings" class="primary-button">Save Settings</button>
                 <button id="reset-settings" class="secondary-button">Clear Settings</button>
+                <button id="clear-cache" class="secondary-button">Clear Cache</button>
             </div>
         </div>
     `;
@@ -108,6 +109,7 @@ export function openSettingsView() {
     setTimeout(() => {
         const saveButton = document.getElementById('save-settings');
         const resetButton = document.getElementById('reset-settings');
+        const clearCacheButton = document.getElementById('clear-cache');
         
         if (saveButton) {
             saveButton.addEventListener('click', () => {
@@ -157,6 +159,32 @@ export function openSettingsView() {
                 // Remove reset message after 3 seconds
                 setTimeout(() => {
                     resetMessage.remove();
+                }, 3000);
+            });
+        }
+
+        if (clearCacheButton) {
+            clearCacheButton.addEventListener('click', () => {
+                // Clear the cache
+                if (caches) {
+                    caches.keys().then(cacheNames => {
+                        cacheNames.forEach(cacheName => {
+                            caches.delete(cacheName);
+                        });
+                    });
+                }
+                
+                // Show cache cleared message
+                const cacheClearedMessage = document.createElement('div');
+                cacheClearedMessage.classList.add('settings-success');
+                cacheClearedMessage.textContent = 'Cache cleared successfully!';
+                
+                const settingsContainer = document.querySelector('.settings-container');
+                settingsContainer.appendChild(cacheClearedMessage);
+                
+                // Remove cache cleared message after 3 seconds
+                setTimeout(() => {
+                    cacheClearedMessage.remove();
                 }, 3000);
             });
         }
